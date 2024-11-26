@@ -1,0 +1,47 @@
+debug: false
+logging:
+    level:
+        org:
+            hibernate: INFO
+            springframework:
+                web:
+                    filter:
+                        CommonsRequestLoggingFilter: INFO
+        root: INFO
+server:
+    port: 8081
+    servlet:
+        session:
+            timeout: 64800m
+    session:
+        timeout: 3888000
+spring:
+    data:
+        rest:
+            basePath: /api
+            default-page-size: 10
+            max-page-size: 10000
+            returnBodyOnCreate: true
+            returnBodyOnUpdate: true
+    datasource:
+        password: ${DATABASE_PASSWORD:postgres}
+        url: ${DATABASE_URL:jdbc:postgresql://192.168.222.17:5432/plm}
+        username: ${DATABASE_USER:postgres}
+    jpa:
+        hibernate:
+            jdbc:
+                batch_versioned_data: true
+        properties:
+            hibernate:
+                format_sql: true
+                jdbc:
+                    batch_size: 20
+                order_inserts: true
+                order_updates: true
+    mvc:
+        pathmatch:
+            matching-strategy: ant-path-matcher
+    servlet:
+        multipart:
+            max-file-size: 150MB
+            max-request-size: 150MB
