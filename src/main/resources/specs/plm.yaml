@@ -84,6 +84,12 @@ components:
           type: string
           description: Полный путь
           example: Полный путь 1
+        children:
+          type: array
+          description: Иерархическое дерево
+          items:
+            $ref: "#/components/schemas/plm"
+
 #    refRecordInDto:
 #      type: object
 #      description: Строка справочника
