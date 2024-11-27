@@ -55,37 +55,18 @@ public class AdminApiService implements PlmApiDelegate {
         PlmTreeView nextElement = new PlmTreeView();
         while (listIterator.hasNext()) {
             nextElement = (PlmTreeView) listIterator.next();
-            System.out.println("curElement = " + (curElement != null ? curElement.getName() : "Пусто"));
-            System.out.println("nextElement = " + nextElement.getName());
-            System.out.println("curLevel = " + curLevel);
             if (curLevel > 0 && curElement != null && nextElement.getLevel().equals(curElement.getLevel())) {
                 children.add(plmMapper.fromViewToDto(curElement));
-                System.out.println("curLevel = " + curLevel);
-                System.out.println("----------   Уровни равны. add child: " + plmMapper.fromViewToDto(curElement).getName());
                 if (!listIterator.hasNext()) {
                     children.add(plmMapper.fromViewToDto(nextElement));
                 }
             } else if (nextElement.getLevel() > curLevel) {
-                System.out.println("-----------   Уровень больше. Текущий уровень" + curLevel + " Следующий уровень " + nextElement.getLevel());
-                System.out.println("curElement = " + (curElement != null ? curElement.getName() : "Пусто"));
-                System.out.println("nextElement До = " + nextElement.getName());
                 Plm nodeUpNew = curElement == null ? nodeUp : plmMapper.fromViewToDto(curElement);
-
                 nextElement = buildTree(treeViewList, listIterator, nodeUpNew, nextElement, nextElement.getLevel());
-                System.out.println("nextElement После = " + nextElement.getName());
-
                 children.add(nodeUpNew);
-
-                System.out.println("Уровень больше.  nodeUpNew = " + nodeUpNew.getName());
             } else if (nextElement.getLevel() < curLevel) {
-                System.out.println("-----------   Уровень меньше. Текущий уровень" + curLevel + " Следующий уровень " + nextElement.getLevel());
                 if (curElement != null) {
                     children.add(plmMapper.fromViewToDto(curElement));
-                    System.out.println("------------  Уровень меньше.");
-                    System.out.println("curLevel = " + curLevel);
-                    System.out.println("curElement = " + (curElement != null ? curElement.getName() : "Пусто"));
-                    System.out.println("nextElement = " + nextElement.getName());
-                    System.out.println("=================================");
                 }
                 break;
             }
@@ -93,7 +74,6 @@ public class AdminApiService implements PlmApiDelegate {
         }
         if (!curLevel.equals(0L)) {
             nodeUp.setChildren(children);
-            System.out.println("nodeUp.setChildren(children).  nodeUp - " + nodeUp.getName() + "children" + children);
         }
         return nextElement;
     }
