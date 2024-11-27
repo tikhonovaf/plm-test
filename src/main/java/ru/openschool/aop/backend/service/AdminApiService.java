@@ -7,7 +7,7 @@ import ru.openschool.aop.backend.dto.Plm;
 import ru.openschool.aop.backend.mapper.PlmMapper;
 import ru.openschool.aop.backend.model.PlmTreeView;
 import ru.openschool.aop.backend.repository.PlmTreeViewRepository;
-import ru.openschool.aop.backend.api.AdminApiDelegate;
+import ru.openschool.aop.backend.api.PlmApiDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class AdminApiService implements AdminApiDelegate {
+public class AdminApiService implements PlmApiDelegate {
     private final PlmTreeViewRepository plmTreeViewRepository;
     private final PlmMapper plmMapper;
 
@@ -43,43 +43,59 @@ public class AdminApiService implements AdminApiDelegate {
         List<Plm> children = new ArrayList<>();
         Long curLevel = 1L;
 
-        buildTree(treeViewList, listIterator, null, tree, null, 0l);
+        buildTree(treeViewList, listIterator, tree, null, 0l);
         List<Plm> plmList = new ArrayList<>();
         plmList.add(tree);
 
         return ResponseEntity.ok(plmList);
     }
 
-    private void buildTree(List<PlmTreeView> treeViewList, ListIterator<PlmTreeView> listIterator, Plm nodeUp, Plm node, PlmTreeView curElement, Long curLevel) {
+    private PlmTreeView buildTree(List<PlmTreeView> treeViewList, ListIterator<PlmTreeView> listIterator, Plm nodeUp, PlmTreeView curElement, Long curLevel) {
         List<Plm> children = new ArrayList<>();
-        if (curElement != null ) {
-            children.add(plmMapper.fromViewToDto(curElement));
-        }
+        PlmTreeView nextElement = new PlmTreeView();
         while (listIterator.hasNext()) {
-            PlmTreeView nextElement = (PlmTreeView) listIterator.next();
-            if (nextElement.getLevel().equals(curLevel)) {
-                children.add(plmMapper.fromViewToDto(nextElement));
+            nextElement = (PlmTreeView) listIterator.next();
+            System.out.println("curElement = " + (curElement != null ? curElement.getName() : "Пусто"));
+            System.out.println("nextElement = " + nextElement.getName());
+            System.out.println("curLevel = " + curLevel);
+            if (curLevel > 0 && curElement != null && nextElement.getLevel().equals(curElement.getLevel())) {
+                children.add(plmMapper.fromViewToDto(curElement));
+                System.out.println("curLevel = " + curLevel);
+                System.out.println("----------   Уровни равны. add child: " + plmMapper.fromViewToDto(curElement).getName());
+                if (!listIterator.hasNext()) {
+                    children.add(plmMapper.fromViewToDto(nextElement));
+                }
             } else if (nextElement.getLevel() > curLevel) {
-                Plm prevNode = node;
-                if (listIterator.hasPrevious()) {
-                    listIterator.previous();
-                    if (listIterator.hasPrevious()) {
-                        prevNode = plmMapper.fromViewToDto((PlmTreeView) listIterator.previous());
-                    }
-                }
-                listIterator.next();
-                buildTree(treeViewList, listIterator,  prevNode, prevNode, nextElement, nextElement.getLevel());
-                if (children.size() > 0 )  {
-                    children.remove(children.size()-1);
-                }
-                children.add(prevNode);
+                System.out.println("-----------   Уровень больше. Текущий уровень" + curLevel + " Следующий уровень " + nextElement.getLevel());
+                System.out.println("curElement = " + (curElement != null ? curElement.getName() : "Пусто"));
+                System.out.println("nextElement До = " + nextElement.getName());
+                Plm nodeUpNew = curElement == null ? nodeUp : plmMapper.fromViewToDto(curElement);
+
+                nextElement = buildTree(treeViewList, listIterator, nodeUpNew, nextElement, nextElement.getLevel());
+                System.out.println("nextElement После = " + nextElement.getName());
+
+                children.add(nodeUpNew);
+
+                System.out.println("Уровень больше.  nodeUpNew = " + nodeUpNew.getName());
             } else if (nextElement.getLevel() < curLevel) {
+                System.out.println("-----------   Уровень меньше. Текущий уровень" + curLevel + " Следующий уровень " + nextElement.getLevel());
+                if (curElement != null) {
+                    children.add(plmMapper.fromViewToDto(curElement));
+                    System.out.println("------------  Уровень меньше.");
+                    System.out.println("curLevel = " + curLevel);
+                    System.out.println("curElement = " + (curElement != null ? curElement.getName() : "Пусто"));
+                    System.out.println("nextElement = " + nextElement.getName());
+                    System.out.println("=================================");
+                }
                 break;
             }
+            curElement = nextElement;
         }
-        if (nodeUp != null) {
+        if (!curLevel.equals(0L)) {
             nodeUp.setChildren(children);
+            System.out.println("nodeUp.setChildren(children).  nodeUp - " + nodeUp.getName() + "children" + children);
         }
+        return nextElement;
     }
 }
 

@@ -29,15 +29,15 @@ paths:
       responses:
         200:
           description: Пустой ответ
-  /admin/plmTree:
+  /plm/plmTree:
     get:
-      summary: Выборка списка ролей
+      summary: Иерархическое дерево
       operationId: getPlmTree
       tags:
-        - ADMIN
+        - PLM
       responses:
         200:
-          description: Список ролей
+          description: Иерархическое дерево
           content:
             application/json:
               schema:
