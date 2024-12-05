@@ -12,7 +12,6 @@ import ru.openschool.aop.backend.api.PlmApiDelegate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.stream.Collectors;
 
 /**
  * Класс для выполнения функций rest сервисов (GET, POST, PATCH, DELETE)
@@ -21,15 +20,12 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class AdminApiService implements PlmApiDelegate {
+public class PlmApiService implements PlmApiDelegate {
     private final PlmTreeViewRepository plmTreeViewRepository;
     private final PlmMapper plmMapper;
 
-
-//    Справочники
-
     /**
-     * Список ролей
+     * Выборка дерева
      */
     @Override
     public ResponseEntity<List<Plm>> getPlmTree() {

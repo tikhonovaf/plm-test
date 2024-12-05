@@ -1,0 +1,196 @@
+[
+  {
+    "sPk": null,
+    "sParentid": null,
+    "name": "Справочник",
+    "description": null,
+    "className": "Корень",
+    "level": 0,
+    "path": null,
+    "children": [
+      {
+        "sPk": 14,
+        "sParentid": 1,
+        "name": "Винт М16х42 ГОСТ 17475-80",
+        "description": "Винт М16х42 ГОСТ 17475-80",
+        "className": "Винт М16х42 ГОСТ 17475-80",
+        "level": 1,
+        "path": "Винт М16х42 ГОСТ 17475-80",
+        "children": null
+      },
+      {
+        "sPk": 2,
+        "sParentid": 1,
+        "name": "Деталь01",
+        "description": "545344535",
+        "className": "Деталь01",
+        "level": 1,
+        "path": "Деталь01",
+        "children": null
+      },
+      {
+        "sPk": 3,
+        "sParentid": 1,
+        "name": "Деталь02",
+        "description": "TopsBI-004-2024",
+        "className": "Деталь02",
+        "level": 1,
+        "path": "Деталь02",
+        "children": null
+      },
+      {
+        "sPk": 19,
+        "sParentid": 1,
+        "name": "Деталь02",
+        "description": "TopsBI-004-2024",
+        "className": "Деталь02",
+        "level": 1,
+        "path": "Деталь02",
+        "children": null
+      },
+      {
+        "sPk": 4,
+        "sParentid": 1,
+        "name": "Деталь02",
+        "description": "TopsBI-004-2024",
+        "className": "Деталь02",
+        "level": 1,
+        "path": "Деталь02",
+        "children": null
+      },
+      {
+        "sPk": 5,
+        "sParentid": 1,
+        "name": "Корпус",
+        "description": "TopsBI-007-2024",
+        "className": "Корпус",
+        "level": 1,
+        "path": "Корпус",
+        "children": null
+      },
+      {
+        "sPk": 17,
+        "sParentid": 1,
+        "name": "Крышка ротора",
+        "description": "TopsBI-013-2024",
+        "className": "Крышка ротора",
+        "level": 1,
+        "path": "Крышка ротора",
+        "children": [
+          {
+            "sPk": 7,
+            "sParentid": 17,
+            "name": "Вал",
+            "description": "TopsBI-010-2024",
+            "className": "Вал",
+            "level": 2,
+            "path": "Крышка ротора\\Вал",
+            "children": null
+          },
+          {
+            "sPk": 8,
+            "sParentid": 17,
+            "name": "Втулка",
+            "description": "TopsBI-011-2024",
+            "className": "Втулка",
+            "level": 2,
+            "path": "Крышка ротора\\Втулка",
+            "children": null
+          }
+        ]
+      },
+      {
+        "sPk": 6,
+        "sParentid": 1,
+        "name": "Манжета",
+        "description": "TopsBI-008-2024",
+        "className": "Манжета",
+        "level": 1,
+        "path": "Манжета",
+        "children": null
+      },
+      {
+        "sPk": 13,
+        "sParentid": 1,
+        "name": "Материалы",
+        "description": "",
+        "className": "Материалы",
+        "level": 1,
+        "path": "Материалы",
+        "children": [
+          {
+            "sPk": 12,
+            "sParentid": 13,
+            "name": "Розетка",
+            "description": "TopsBI-016-2024",
+            "className": "Розетка",
+            "level": 2,
+            "path": "Материалы\\Розетка",
+            "children": null
+          },
+          {
+            "sPk": 18,
+            "sParentid": 13,
+            "name": "Сталь 45 ГОСТ 45678-14",
+            "description": "Сталь 45 ГОСТ 45678-14",
+            "className": "Сталь 45 ГОСТ 45678-14",
+            "level": 2,
+            "path": "Материалы\\Сталь 45 ГОСТ 45678-14",
+            "children": [
+              {
+                "sPk": 16,
+                "sParentid": 18,
+                "name": "Вал быстроходный",
+                "description": "TopsBI-009-2024",
+                "className": "Вал быстроходный",
+                "level": 3,
+                "path": "Материалы\\Сталь 45 ГОСТ 45678-14\\Вал быстроходный",
+                "children": null
+              },
+              {
+                "sPk": 15,
+                "sParentid": 18,
+                "name": "Редуктор",
+                "description": "TopsBI-006-2024",
+                "className": "Редуктор",
+                "level": 3,
+                "path": "Материалы\\Сталь 45 ГОСТ 45678-14\\Редуктор",
+                "children": null
+              }
+            ]
+          },
+          {
+            "sPk": 11,
+            "sParentid": 1,
+            "name": "Панель",
+            "description": "TopsBI-015-2024",
+            "className": "Панель",
+            "level": 1,
+            "path": "Панель",
+            "children": null
+          },
+          {
+            "sPk": 10,
+            "sParentid": 1,
+            "name": "Стакан",
+            "description": "TopsBI-014-2024",
+            "className": "Стакан",
+            "level": 1,
+            "path": "Стакан",
+            "children": null
+          },
+          {
+            "sPk": 9,
+            "sParentid": 1,
+            "name": "Шпилька",
+            "description": "TopsBI-012-2024",
+            "className": "Шпилька",
+            "level": 1,
+            "path": "Шпилька",
+            "children": null
+          }
+        ]
+      }
+    ]
+  }
+]
